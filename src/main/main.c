@@ -13,39 +13,9 @@
 #include "../../includes/fract_ol.h"
 
 static int check_fractol_type(int argc, char **argv);
-// static int	check_args_julia(t_mlx_data *mlx, char **argv);
-// static int	check_args(int argc, char **argv);
-// static int	init_fractol(t_mlx_data *mlx, int type, char **argv);
-
-// atexit(leaks);
-// Main va a funcionar de controler, Y NADA MAS
-//  int	main(int argc, char **argv)
-//  {
-//  	t_mlx_data	*mlx; //Declaramos la estructura t_mlx_data
-//  	int			type; //El tipo de fractol
-
-// 	mlx = NULL;
-// 	type = check_args(argc, argv); //comprobamos los argumentos y devuelve tipo??¿??¿?
-// 	mlx = malloc(sizeof(t_mlx_data));
-// 	if (type == -1 || mlx == NULL)
-// 	{
-// 		parameters_instructions();
-// 		free (mlx);
-// 		return (1);
-// 	}
-// 	if (initialize_mlx(mlx) == 1)
-// 	{
-// 		free (mlx);
-// 		return (1);
-// 	}
-// 	if (init_fractol(mlx, type, argv) == -1)
-// 	{
-// 		parameters_instructions();
-// 		cleanup_mlx(mlx);
-// 		return (1);
-// 	}
-// 	return (0);
-// }
+static int check_args_julia(t_mlx_data *mlx, char **argv);
+static int create_fractol(t_mlx_data *mlx, int type, char **argv);
+static int init_fractol(int type, char **argv);
 
 // Comprobamos que argumento nos llega
 // Comprobamos si es julia si tiene todos los argumentos que necesitamos
@@ -56,8 +26,8 @@ int main(int argc, char **argv)
 	type = check_fractol_type(argc, argv);
 	if (type == -1)
 		parameters_instructions();
-	//Si type es 0, mandelbrot, si es 1 julia
-	init_fractol(type,argv);
+	// Si type es 0, mandelbrot, si es 1 julia
+	init_fractol(type, argv);
 	// Si no, hacemos las comprobaciones pertinentes por tipo de fractol!
 	return (0);
 }
@@ -79,10 +49,13 @@ static int check_fractol_type(int argc, char **argv)
 		return (-1);
 }
 
-static int	check_args_julia(t_mlx_data *mlx, char **argv)
+/*
+	TODO: LO MISMO SE PUEDE CAMBIAR POR UN MENSAJE DE ERROR MAS ADECUADO
+*/
+static int check_args_julia(t_mlx_data *mlx, char **argv)
 {
-	float	c_real;
-	float	c_imag;
+	float c_real;
+	float c_imag;
 
 	if (is_numeric(argv[2]) == -1)
 		return (-1);
@@ -107,67 +80,58 @@ static int	check_args_julia(t_mlx_data *mlx, char **argv)
 	return (0);
 }
 
-// //TODO: DEBERIAMOS DE PARTIR ESTE METODO...
-// static int	check_args(int argc, char **argv)
-// {
-// 	int	type;
-
-// 	if (argc < 2)  //Si argumento es menor de 2, esta mal...
-// 	{
-// 		parameters_instructions();
-// 		return (-1);
-// 	}
-// 	else if (argc == 4) //Si argumento es igual a 4, pregunta si es numerico
-// 	{
-// 		if (is_numeric(argv[2]) == -1)
-// 			return (-1);
-// 		if (is_numeric(argv[3]) == -1)
-// 			return (-1);
-// 	}check_args
-// 	type = check_fractol_type(argc, argv);
-// 	if (type == 1)
-// 		return (type);
-// 	else if (type == 0)
-// 		return (type);
-// 	else
-// 	{
-// 		return (-1);
-// 	}
-// }
-
 // TODO: ESte metodo hay que rehacerlo entero!
 static int init_fractol(int type, char **argv)
 {
-	t_mlx_data	*mlx;
+	t_mlx_data *mlx;
 
+	// TODO: ESTO ES MUY MEJORABLE..............................
 	mlx = NULL;
-	if(mlx = malloc(sizeof(t_mlx_data)) == NULL)
+	mlx = malloc(sizeof(t_mlx_data));
+	printf("Hasta aqui bien");
+	if (mlx == NULL)
 	{
-		free (mlx);
+		free(mlx);
 		return (-1);
 	}
-	//declaramos checkeo de si es julia para hacer el check args...
-	//TODO: PROBABLEMENTE HAYA QUE LIBERAR MEMORIA EN LOS ERRORES....
-	if(!create_fractol(mlx,type,argv))
-		return (-1);
-	if(type == 0)
-		draw_mandelbrot(mlx, 1);
-	else if (type == 1) //TODO: LO MISMO SE PUEDE ARREGLAR ESTA LINEA....
+	// declaramos checkeo de si es julia para hacer el check args...
+	// TODO: PROBABLEMENTE HAYA QUE LIBERAR MEMORIA EN LOS ERRORES....
+	if (create_fractol(mlx, type, argv) == -1)
 	{
-		if(check_args_julia(mlx, argv))
+		printf("Ha fallado?!!");
+		return (-1);
+	}
+	printf("type %d...", type);
+	if (type == 0)
+	{
+		printf("DRAW_MANDELBROT...");
+		draw_mandelbrot(mlx, 1);
+	}
+	else if (type == 1) // TODO: LO MISMO SE PUEDE ARREGLAR ESTA LINEA....
+	{
+		printf("JULIA");
+		if (check_args_julia(mlx, argv))
 			draw_julia(mlx, 1);
 		else
 			return (-1);
 	}
-	set_hooks(mlx);
-	mlx_loop(mlx->mlx_ptr);
-	cleanup_mlx(mlx);
-	return (0);
+	if (mlx != NULL && mlx->mlx_ptr != NULL)
+	{
+		printf("Pasamos por aqui");
+		set_hooks(mlx);
+		mlx_loop(mlx->mlx_ptr);
+		cleanup_mlx(mlx);
+		return (0);
+	}
+	else
+	{
+		return (-1);
+	}
 }
 
 /**
  * Crea el el complejo y inicia la estructura....
-*/
+ */
 static int create_fractol(t_mlx_data *mlx, int type, char **argv)
 {
 	if (init_complex(mlx, argv) == -1)
@@ -177,5 +141,5 @@ static int create_fractol(t_mlx_data *mlx, int type, char **argv)
 		return (-1);
 	}
 	init_struct(mlx, type);
-	return (0); 
+	return (0);
 }
