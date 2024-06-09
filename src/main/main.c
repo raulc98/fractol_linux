@@ -94,6 +94,11 @@ static int init_fractol(int type, char **argv)
 		free(mlx);
 		return (-1);
 	}
+	if (initialize_mlx(mlx) == 1)
+	{
+		free (mlx);
+		return (1);
+	}
 	// declaramos checkeo de si es julia para hacer el check args...
 	// TODO: PROBABLEMENTE HAYA QUE LIBERAR MEMORIA EN LOS ERRORES....
 	if (create_fractol(mlx, type, argv) == -1)

@@ -67,6 +67,7 @@ void	init_struct(t_mlx_data *mlx, int type)
 	mlx->max_imag = 1.5;
 	mlx->max_iterations = 40;
 	mlx->fractal_type = type;
+	mlx->color = 1;
 }
 
 void	set_hooks(t_mlx_data *mlx)
