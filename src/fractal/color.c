@@ -23,35 +23,29 @@ static int	color_iterations(t_mlx_data *mlx, int iteration);
 */
 int	get_color(t_mlx_data *mlx, int color_scheme, int iteration)
 {
-	// unsigned char	color;
-	// unsigned char	red;
-	// unsigned char	green;
-	// unsigned char	blue;
+	unsigned char	color;
+	unsigned char	red;
+	unsigned char	green;
+	unsigned char	blue;
 
-	unsigned char color = color_iterations(mlx, iteration);
-	printf("COLOR: %d\n",color);
-	printf("COLOR_SCHEME: %d\n", color_scheme);
-	// if (color_scheme == 1)
-	// {
-	// 	printf("PASA POR AQUI");
+	color = color_iterations(mlx, iteration);
+	if (color_scheme == 1)
 		return (color << 8);
-	// }
-	// else if (color_scheme == 2)
-	// 	return (color << 16);
-	// else if (color_scheme == 3)
-	// 	return (color);
-	// else if (color_scheme == 4)
-	// {
-	// 	red = (iteration * 5) % 256;
-	// 	green = (iteration * 10) % 256;
-	// 	blue = (iteration * 15) % 256;
-	// 	return (red << 16 | green << 8 | blue);
-	// }
-	// else
-	// {
-	// 	printf("PASAMOS POR AAQUIIII");
-	// 	return (color << 16 | 33 << 8 | 33);
-	// }
+	else if (color_scheme == 2)
+		return (color << 16);
+	else if (color_scheme == 3)
+		return (color);
+	else if (color_scheme == 4)
+	{
+		red = (iteration * 5) % 256;
+		green = (iteration * 10) % 256;
+		blue = (iteration * 15) % 256;
+		return (red << 16 | green << 8 | blue);
+	}
+	else
+	{
+		return (color << 16 | 33 << 8 | 33);
+	}
 }
 
 static int	color_iterations(t_mlx_data *mlx, int iteration)

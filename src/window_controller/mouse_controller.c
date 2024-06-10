@@ -14,6 +14,7 @@
 
 int	mouse_press(int button, int x, int y, t_mlx_data *mlx)
 {
+	printf("BOTOOOON: %d\n",button);
 	(void)x;
 	(void)y;
 	if (button == 4)

@@ -14,9 +14,10 @@
 
 void	zoom(t_mlx_data *mlx)
 {
-	mlx->zoom += 1;
+	printf("ZOOOM : %d\n",mlx->zoom);
 	if (mlx->zoom < 150)
 	{
+		mlx->zoom += 1;
 		mlx->step /= 1.12;
 		zoom_fractal(mlx, 580 / 2, 580 / 2, 1.0 / 0.87);
 	}
@@ -24,9 +25,9 @@ void	zoom(t_mlx_data *mlx)
 
 void	zoom_out(t_mlx_data *mlx)
 {
-	mlx->zoom -= 1;
 	if (mlx->zoom > -5)
 	{
+		mlx->zoom -= 1;
 		mlx->step *= 1.12;
 		zoom_fractal(mlx, 580 / 2, 580 / 2, 0.87);
 	}
@@ -47,8 +48,4 @@ void	zoom_fractal(t_mlx_data *mlx, int x, int y, float zoom_factor)
 	mlx->max_real = c_real + new_width / 2;
 	mlx->min_imag = c_imag - new_height / 2;
 	mlx->max_imag = c_imag + new_height / 2;
-	if (mlx->fractal_type == 0)
-		draw_mandelbrot(mlx, -1);
-	else
-		draw_julia(mlx, -1);
 }

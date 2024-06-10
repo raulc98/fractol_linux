@@ -58,14 +58,14 @@ typedef struct s_complex
 }	t_complex;
 
 int		key_press(int keycode, t_mlx_data *mlx);
-int		handle_input(int keycode, t_mlx_data *data);
+int		handle_options_input(int keycode, t_mlx_data *data);
 void	zoom(t_mlx_data *mlx);
 void	zoom_out(t_mlx_data *mlx);
 void	zoom_fractal(t_mlx_data *mlx, int x, int y, float zoom_factor);
-int		move_up(t_mlx_data *mlx, float step);
-int		move_down(t_mlx_data *mlx, float step);
-int		move_rigth(t_mlx_data *mlx, float step);
-int		move_left(t_mlx_data *mlx, float step);
+void	move_up(t_mlx_data *mlx, float step);
+void	move_down(t_mlx_data *mlx, float step);
+void	move_rigth(t_mlx_data *mlx, float step);
+void	move_left(t_mlx_data *mlx, float step);
 void	increase_iterations(t_mlx_data *mlx);
 void	decrease_iterations(t_mlx_data *mlx);
 void	draw_mandelbrot(t_mlx_data *mlx, int first_time);
@@ -88,4 +88,6 @@ void	cleanup_mlx(t_mlx_data *mlx);
 int		init_complex(t_mlx_data *mlx, char **argv);
 void	leaks(void);
 void	parameters_instructions(void);
+
+void	check_fractol_type_controller(t_mlx_data *mlx);
 #endif

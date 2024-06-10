@@ -37,7 +37,8 @@ TITLE       =   \033[38;5;33m
 
 ACTIONS     =   iterations.c \
                 move.c \
-                zoom.c
+                zoom.c \
+				check_fractol_type_controller.c
 FRACTAL     =   color.c \
                 julia.c \
                 mandelbrot.c

@@ -25,26 +25,29 @@ static void	change_color_scheme(t_mlx_data *mlx, int new_color_scheme);
  * ITERATIONS + : 1
  * IRERATIONS - : 2
 */
+//TODO: DEBERIAMOS DE CAMBIARLOS POR QUE LA GENTE DICE QUE ESTA AK REVES... FALSO!
 int	key_press(int keycode, t_mlx_data *mlx)
 {
-	if (keycode == 2 || keycode == 124)
+	printf("Has pulsado la tecla: %d\n",keycode);
+	if (keycode == 65363 || keycode == 100)
 		move_rigth(mlx, mlx->step);
-	else if (keycode == 0 || keycode == 123)
+	else if (keycode == 65361 || keycode == 97)
 		move_left(mlx, mlx->step);
-	else if (keycode == 1 || keycode == 125)
+	else if (keycode == 65364 || keycode == 115)
 		move_down(mlx, mlx->step);
-	else if (keycode == 13 || keycode == 126)
+	else if (keycode == 65362 || keycode == 119)
 		move_up(mlx, mlx->step);
-	else if (keycode == 69 || keycode == 35 || keycode == 30)
+	else if (keycode == 65451 || keycode == 43)
 		zoom(mlx);
-	else if (keycode == 78 || keycode == 36 || keycode == 42)
+	else if (keycode == 65453 || keycode == 231)
 		zoom_out(mlx);
-	else if (keycode == 19 || keycode == 33)
+	else if (keycode == 49)
 		increase_iterations(mlx);
-	else if (keycode == 18 || keycode == 39)
+	else if (keycode == 50)
 		decrease_iterations(mlx);
 	else
-		handle_input (keycode, mlx);
+		handle_options_input (keycode, mlx);
+	check_fractol_type_controller(mlx);
 	return (0);
 }
 
@@ -56,20 +59,20 @@ int	key_press(int keycode, t_mlx_data *mlx)
 	Y: 27-> Change color to blue
 	U: 32-> Change color to many colors
 */
-int	handle_input(int keycode, t_mlx_data *data)
+int	handle_options_input(int keycode, t_mlx_data *data)
 {
-	if (keycode == 53)
+	if (keycode == 65307)
 	{
 		free(data->mlx_ptr);
 		exit(1);
 	}
 	if (keycode == 15)
 		change_color_scheme(data, 1);
-	else if (keycode == 16)
+	else if (keycode == 51)
 		change_color_scheme(data, 2);
-	else if (keycode == 17)
+	else if (keycode == 52)
 		change_color_scheme(data, 3);
-	else if (keycode == 32)
+	else if (keycode == 53)
 		change_color_scheme(data, 4);
 	return (0);
 }
@@ -77,9 +80,5 @@ int	handle_input(int keycode, t_mlx_data *data)
 static void	change_color_scheme(t_mlx_data *mlx, int new_color_scheme)
 {
 	mlx->color = new_color_scheme;
-	if (mlx->fractal_type == 0)
-		draw_mandelbrot(mlx, -1);
-	else
-		draw_julia(mlx, -1);
 	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img.ptr, 0, 0);
 }

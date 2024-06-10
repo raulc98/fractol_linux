@@ -15,17 +15,9 @@
 void	increase_iterations(t_mlx_data *mlx)
 {
 	mlx->max_iterations += 10;
-	if (mlx->fractal_type == 0)
-		draw_mandelbrot(mlx, -1);
-	else
-		draw_julia(mlx, -1);
 }
 
 void	decrease_iterations(t_mlx_data *mlx)
 {
 	mlx->max_iterations -= 10;
-	if (mlx->fractal_type == 0)
-		draw_mandelbrot(mlx, -1);
-	else
-		draw_julia(mlx, -1);
 }

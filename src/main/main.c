@@ -79,7 +79,7 @@ static int check_args_julia(t_mlx_data *mlx, char **argv)
 	mlx->c_imag = c_imag;
 	return (0);
 }
-
+// TODO: DEBERIAMOS DE COMPROBAR LOS LEAKS...........
 // TODO: ESte metodo hay que rehacerlo entero!
 static int init_fractol(int type, char **argv)
 {
@@ -116,22 +116,29 @@ static int init_fractol(int type, char **argv)
 	{
 		printf("JULIA");
 		if (check_args_julia(mlx, argv))
+		{
+			printf("\nDRAW JULIA!\n");
 			draw_julia(mlx, 1);
+
+		}
 		else
 			return (-1);
 	}
-	if (mlx != NULL && mlx->mlx_ptr != NULL)
-	{
+	printf("Pasamos por aqui");
+	printf("ESTE ES EL IMPORTANTE\n");
+	printf("Pasamos por aqui");
+	// if (mlx != NULL && mlx->mlx_ptr != NULL)
+	// {
 		printf("Pasamos por aqui");
 		set_hooks(mlx);
 		mlx_loop(mlx->mlx_ptr);
 		cleanup_mlx(mlx);
 		return (0);
-	}
-	else
-	{
-		return (-1);
-	}
+	// }
+	// else
+	// {
+	// 	return (-1);
+	// }
 }
 
 /**
