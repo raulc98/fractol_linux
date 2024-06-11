@@ -88,7 +88,6 @@ static int init_fractol(int type, char **argv)
 	// TODO: ESTO ES MUY MEJORABLE..............................
 	mlx = NULL;
 	mlx = malloc(sizeof(t_mlx_data));
-	printf("Hasta aqui bien");
 	if (mlx == NULL)
 	{
 		free(mlx);
@@ -104,6 +103,7 @@ static int init_fractol(int type, char **argv)
 	if (create_fractol(mlx, type, argv) == -1)
 	{
 		printf("Ha fallado?!!");
+		free(mlx);
 		return (-1);
 	}
 	printf("type %d...", type);
@@ -119,7 +119,6 @@ static int init_fractol(int type, char **argv)
 		{
 			printf("\nDRAW JULIA!\n");
 			draw_julia(mlx, 1);
-
 		}
 		else
 			return (-1);

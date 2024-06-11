@@ -16,26 +16,22 @@ void	move_up(t_mlx_data *mlx, float step)
 {
 	mlx->min_imag -= step;
 	mlx->max_imag -= step;
-	// check_fractol_type_controller(mlx);
 }
 
 void	move_down(t_mlx_data *mlx, float step)
 {
 	mlx->min_imag += step;
 	mlx->max_imag += step;
-	// check_fractol_type_controller(mlx);
 }
 
 void	move_rigth(t_mlx_data *mlx, float step)
 {
 	mlx->min_real -= step;
 	mlx->max_real -= step;
-	// check_fractol_type_controller(mlx);
 }
 
 void	move_left(t_mlx_data *mlx, float step)
 {
 	mlx->min_real += step;
 	mlx->max_real += step;
-	// check_fractol_type_controller(mlx);
 }

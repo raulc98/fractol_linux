@@ -54,8 +54,7 @@ MAIN        =   instructions.c \
 				init_complex.c \
                 main.c
 WINDOW      =   key_controller.c \
-                mouse_controller.c \
-                window_controller.c
+                mouse_controller.c
 FRACTOL_SRC =   $(ACTIONS:%=actions/%) \
                 $(FRACTAL:%=fractal/%) \
                 $(LIBFT:%=libft_utils/%) \

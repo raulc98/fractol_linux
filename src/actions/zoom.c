@@ -12,40 +12,41 @@
 
 #include "../../includes/fract_ol.h"
 
+static void	zoom_fractal(t_mlx_data *mlx, float zoom_factor);
+
 void	zoom(t_mlx_data *mlx)
 {
-	printf("ZOOOM : %d\n",mlx->zoom);
-	if (mlx->zoom < 150)
-	{
-		mlx->zoom += 1;
-		mlx->step /= 1.12;
-		zoom_fractal(mlx, 580 / 2, 580 / 2, 1.0 / 0.87);
-	}
+	mlx->zoom += 1;
+	mlx->step /= 1.12; //TODO: este zoom aporta algo¿¿?¿?
+	zoom_fractal(mlx, 1.0 / 0.87);
 }
 
 void	zoom_out(t_mlx_data *mlx)
 {
-	if (mlx->zoom > -5)
-	{
-		mlx->zoom -= 1;
-		mlx->step *= 1.12;
-		zoom_fractal(mlx, 580 / 2, 580 / 2, 0.87);
-	}
+	mlx->zoom -= 1;
+	mlx->step *= 1.12;
+	zoom_fractal(mlx, 0.87);
 }
 
-void	zoom_fractal(t_mlx_data *mlx, int x, int y, float zoom_factor)
+static void zoom_fractal(t_mlx_data *mlx, float zoom_factor)
 {
 	double	c_real;
 	double	c_imag;
-	double	new_width;
-	double	new_height;
+	double	new_size;
 
-	c_real = mlx->min_real + x * ((mlx->max_real - mlx->min_real) / 580);
-	c_imag = mlx->max_imag - y * ((mlx->max_imag - mlx->min_imag) / 580);
-	new_width = (mlx->max_real - mlx->min_real) / zoom_factor;
-	new_height = (mlx->max_imag - mlx->min_imag) / zoom_factor;
-	mlx->min_real = c_real - new_width / 2;
-	mlx->max_real = c_real + new_width / 2;
-	mlx->min_imag = c_imag - new_height / 2;
-	mlx->max_imag = c_imag + new_height / 2;
+	c_real = mlx->min_real + 290 * ((mlx->max_real - mlx->min_real) / 580);
+	printf("c_real: %f\n",c_real);
+	c_imag = mlx->max_imag - 290 * ((mlx->max_imag - mlx->min_imag) / 580);
+	printf("c_imag: %f\n",c_imag);
+	new_size = (mlx->max_imag - mlx->min_imag) / zoom_factor; //Esta operacion que aporta exactamente?¿???¿?
+	printf("new_size: %f\n", new_size);
+	if(new_size > 0.000001 && new_size < 10)
+	{
+		mlx->min_real = c_real - new_size / 2;
+		mlx->max_real = c_real + new_size / 2;
+		mlx->min_imag = c_imag - new_size / 2;
+		mlx->max_imag = c_imag + new_size / 2;
+	}else{
+		printf("Demasiado zoooom :( %f\n", new_size);
+	}
 }

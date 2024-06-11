@@ -61,7 +61,6 @@ int		key_press(int keycode, t_mlx_data *mlx);
 int		handle_options_input(int keycode, t_mlx_data *data);
 void	zoom(t_mlx_data *mlx);
 void	zoom_out(t_mlx_data *mlx);
-void	zoom_fractal(t_mlx_data *mlx, int x, int y, float zoom_factor);
 void	move_up(t_mlx_data *mlx, float step);
 void	move_down(t_mlx_data *mlx, float step);
 void	move_rigth(t_mlx_data *mlx, float step);
