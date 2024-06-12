@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+//TODO: PODEMOS BORRAR TOOODO ESTO
 #include "../../includes/fract_ol.h"
 
 void	draw_mandelbrot_row(t_mlx_data *mlx, int y, float c_imag);
@@ -17,13 +18,15 @@ void	draw_mandelbrot_row(t_mlx_data *mlx, int y, float c_imag);
 void	put_pixel_to_image(t_image *image, int x, int y, int color)
 {
 	unsigned int	*pixel_ptr;
-
-	// printf("Por aquiiii");
 	pixel_ptr = (unsigned int *)(image->addr
 			+ (y * image->line_length) + (x * (image->bpp / 8)));
 	*pixel_ptr = color;
 }
 
+/**
+ * PINTA COORDENADAS EN Y!!!!
+ */
+//TODO: ES EL MIIIIIIIIISMO METODO QUE EL DE DRAW_JULIA!!!!!!!!!!!!!!
 void	draw_mandelbrot(t_mlx_data *mlx, int first_time)
 {
 	int		y;
@@ -42,6 +45,9 @@ void	draw_mandelbrot(t_mlx_data *mlx, int first_time)
 	}
 }
 
+/**
+ * PINTA COORDENADAS EN X!!!!
+ */
 void	draw_mandelbrot_row(t_mlx_data *mlx, int y, float c_imag)
 {
 	t_complex	c;
@@ -55,36 +61,12 @@ void	draw_mandelbrot_row(t_mlx_data *mlx, int y, float c_imag)
 		c_real = mlx->min_real + x * ((mlx->max_real - mlx->min_real) / 720);
 		c.real = c_real;
 		c.imag = c_imag;
-		iter = mandelbrot(c, mlx->max_iterations);
+		iter = iterator(c, mlx->max_iterations);
 		int color_get = get_color(mlx, mlx->color, iter);
 		if(&mlx->img)
 		{
 			put_pixel_to_image(&mlx->img, x, y, color_get);
-		}else{
-			printf("OH,.....");
 		}
 		x++;
 	}
-	// printf("SALIMOS");
-}
-
-int	mandelbrot(t_complex c, int max_iterations)
-{
-	float	z_real;
-	float	z_imag;
-	float	temp;
-	int		n;
-
-	z_real = 0.0f;
-	z_imag = 0.0f;
-	temp = 0;
-	n = 0;
-	while (z_real * z_real + z_imag * z_imag <= 4.0f && n < max_iterations)
-	{
-		temp = z_real;
-		z_real = z_real * z_real - z_imag * z_imag + c.real;
-		z_imag = 2.0f * temp * z_imag + c.imag;
-		n++;
-	}
-	return (n);
 }

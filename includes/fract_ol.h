@@ -89,4 +89,8 @@ void	leaks(void);
 void	parameters_instructions(void);
 
 void	check_fractol_type_controller(t_mlx_data *mlx);
+int		iterator(t_complex c, int max_iterations);
+void	calculate_y(t_mlx_data *mlx, int first_time);
+void	calculate_x(t_mlx_data *mlx, int y,const float c_imag);
+
 #endif

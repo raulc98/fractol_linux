@@ -24,6 +24,7 @@ int main(int argc, char **argv)
 	int type;
 	// Controlamos parametros
 	type = check_fractol_type(argc, argv);
+	printf("TYPE: %d\n",type );
 	if (type == -1)
 		parameters_instructions();
 	// Si type es 0, mandelbrot, si es 1 julia
@@ -57,6 +58,7 @@ static int check_args_julia(t_mlx_data *mlx, char **argv)
 	float c_real;
 	float c_imag;
 
+	printf("Hola");
 	if (is_numeric(argv[2]) == -1)
 		return (-1);
 	if (is_numeric(argv[3]) == -1)
@@ -68,6 +70,7 @@ static int check_args_julia(t_mlx_data *mlx, char **argv)
 		cleanup_mlx(mlx);
 		return (-1);
 	}
+	printf("Atof...");
 	c_imag = ft_atof(argv[3]);
 	if (c_imag == -1)
 	{
@@ -75,12 +78,14 @@ static int check_args_julia(t_mlx_data *mlx, char **argv)
 		cleanup_mlx(mlx);
 		return (-1);
 	}
+	printf("TE damos vañpres...");
 	mlx->c_real = c_real;
 	mlx->c_imag = c_imag;
-	return (0);
+	return (1);
 }
 // TODO: DEBERIAMOS DE COMPROBAR LOS LEAKS...........
 // TODO: ESte metodo hay que rehacerlo entero!
+// TODO: TENDREMOS QUE DECIDIR QUE ERROR DEVOLVEMOS, SI ES UNO O  SI ES 0 O -1 O QUEEEEEEEEE.....
 static int init_fractol(int type, char **argv)
 {
 	t_mlx_data *mlx;
@@ -102,42 +107,31 @@ static int init_fractol(int type, char **argv)
 	// TODO: PROBABLEMENTE HAYA QUE LIBERAR MEMORIA EN LOS ERRORES....
 	if (create_fractol(mlx, type, argv) == -1)
 	{
-		printf("Ha fallado?!!");
 		free(mlx);
 		return (-1);
 	}
-	printf("type %d...", type);
-	if (type == 0)
+	printf("\ntype %d...", type);
+	if (mlx->fractal_type == 0)
 	{
 		printf("DRAW_MANDELBROT...");
-		draw_mandelbrot(mlx, 1);
+		calculate_y(mlx, 1);
 	}
-	else if (type == 1) // TODO: LO MISMO SE PUEDE ARREGLAR ESTA LINEA....
+	else if (mlx->fractal_type == 1) // TODO: LO MISMO SE PUEDE ARREGLAR ESTA LINEA....
 	{
 		printf("JULIA");
 		if (check_args_julia(mlx, argv))
 		{
 			printf("\nDRAW JULIA!\n");
-			draw_julia(mlx, 1);
+			calculate_y(mlx, 1);
 		}
 		else
 			return (-1);
 	}
 	printf("Pasamos por aqui");
-	printf("ESTE ES EL IMPORTANTE\n");
-	printf("Pasamos por aqui");
-	// if (mlx != NULL && mlx->mlx_ptr != NULL)
-	// {
-		printf("Pasamos por aqui");
-		set_hooks(mlx);
-		mlx_loop(mlx->mlx_ptr);
-		cleanup_mlx(mlx);
-		return (0);
-	// }
-	// else
-	// {
-	// 	return (-1);
-	// }
+	set_hooks(mlx);
+	mlx_loop(mlx->mlx_ptr);
+	cleanup_mlx(mlx);
+	return (0);
 }
 
 /**
@@ -145,12 +139,12 @@ static int init_fractol(int type, char **argv)
  */
 static int create_fractol(t_mlx_data *mlx, int type, char **argv)
 {
+	init_struct(mlx, type);
 	if (init_complex(mlx, argv) == -1)
 	{
 		parameters_instructions();
 		cleanup_mlx(mlx);
 		return (-1);
 	}
-	init_struct(mlx, type);
 	return (0);
 }

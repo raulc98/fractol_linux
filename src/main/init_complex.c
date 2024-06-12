@@ -20,8 +20,10 @@ int	init_complex(t_mlx_data *mlx, char **argv)
 
 	c_real = 0;
 	c_imag = 0;
+	printf("\n\n mlx->fractal_type %d\n\n",mlx->fractal_type);
 	if (mlx->fractal_type == 1)
 	{
+		printf("ES JUUUUUUUUUULIA \n\n");
 		c_real = ft_atof(argv[2]);
 		c_imag = ft_atof(argv[3]);
 		if (c_real != -1 && c_imag != -1)

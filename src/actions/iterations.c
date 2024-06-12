@@ -14,10 +14,12 @@
 
 void	increase_iterations(t_mlx_data *mlx)
 {
-	mlx->max_iterations += 10;
+	if(mlx->max_iterations < 150)
+		mlx->max_iterations += 10;
 }
 
 void	decrease_iterations(t_mlx_data *mlx)
 {
-	mlx->max_iterations -= 10;
+	if(mlx->max_iterations > 40)
+		mlx->max_iterations -= 10;
 }

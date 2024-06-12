@@ -23,26 +23,6 @@ void	draw_julia_row(t_mlx_data *mlx, int y, float z_imag);
 	float c_imag = -0.01;
 	----------------------
 */
-int	julia(t_complex z, int max_iterations, float c_real, float c_imag)
-{
-	float	z_real;
-	float	z_imag;
-	float	temp;
-	int		n;
-
-	z_real = z.real;
-	z_imag = z.imag;
-	n = 0;
-	temp = 0;
-	while (z_real * z_real + z_imag * z_imag <= 4.0f && n < max_iterations)
-	{
-		temp = z_real;
-		z_real = z_real * z_real - z_imag * z_imag + c_real;
-		z_imag = 2.0f * temp * z_imag + c_imag;
-		n++;
-	}
-	return (n);
-}
 
 void	draw_julia(t_mlx_data *mlx, int first_time)
 {
@@ -71,16 +51,16 @@ void	draw_julia_row(t_mlx_data *mlx, int y, float z_imag)
 	float		z_real;
 	int			x;
 	int			iter;
-	t_complex	z;
+	t_complex	c;
 
 	real_factor = (mlx->max_real - mlx->min_real) / 580;
 	x = 0;
 	while (x < 580)
 	{
 		z_real = mlx->min_real + x * real_factor;
-		z.real = z_real;
-		z.imag = z_imag;
-		iter = julia(z, mlx->max_iterations, mlx->c_real, mlx->c_imag);
+		c.real = z_real;
+		c.imag = z_imag;
+		iter = iterator(c, mlx->max_iterations);
 		put_pixel_to_image(&mlx->img, x, y, get_color(mlx, mlx->color, iter));
 		x++;
 	}

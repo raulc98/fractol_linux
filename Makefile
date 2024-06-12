@@ -40,6 +40,7 @@ ACTIONS     =   iterations.c \
                 zoom.c \
 				check_fractol_type_controller.c
 FRACTAL     =   color.c \
+				fractal_calculator.c \
                 julia.c \
                 mandelbrot.c
 LIBFT       =   ft_putstr_fd.c \
@@ -54,7 +55,7 @@ MAIN        =   instructions.c \
 				init_complex.c \
                 main.c
 WINDOW      =   key_controller.c \
-                mouse_controller.c
+                mouse_controller.c 
 FRACTOL_SRC =   $(ACTIONS:%=actions/%) \
                 $(FRACTAL:%=fractal/%) \
                 $(LIBFT:%=libft_utils/%) \
