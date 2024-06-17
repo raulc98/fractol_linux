@@ -78,8 +78,9 @@ static int check_args_julia(t_mlx_data *mlx, char **argv)
 		cleanup_mlx(mlx);
 		return (-1);
 	}
-	printf("TE damos vañpres...");
+	printf("C_REAL %f\n",c_real);
 	mlx->c_real = c_real;
+	printf("C_IMAG %f\n",c_imag);
 	mlx->c_imag = c_imag;
 	return (1);
 }

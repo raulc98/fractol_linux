@@ -60,7 +60,7 @@ void	draw_julia_row(t_mlx_data *mlx, int y, float z_imag)
 		z_real = mlx->min_real + x * real_factor;
 		c.real = z_real;
 		c.imag = z_imag;
-		iter = iterator(c, mlx->max_iterations);
+		iter = iterator_mandelbrot(c, mlx->max_iterations);
 		put_pixel_to_image(&mlx->img, x, y, get_color(mlx, mlx->color, iter));
 		x++;
 	}

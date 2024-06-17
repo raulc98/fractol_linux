@@ -61,7 +61,7 @@ void	draw_mandelbrot_row(t_mlx_data *mlx, int y, float c_imag)
 		c_real = mlx->min_real + x * ((mlx->max_real - mlx->min_real) / 720);
 		c.real = c_real;
 		c.imag = c_imag;
-		iter = iterator(c, mlx->max_iterations);
+		iter = iterator_mandelbrot(c, mlx->max_iterations);
 		int color_get = get_color(mlx, mlx->color, iter);
 		if(&mlx->img)
 		{
