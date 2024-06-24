@@ -12,10 +12,21 @@
 
 #include "../../includes/fract_ol.h"
 
-static int check_fractol_type(int argc, char **argv);
-static int check_args_julia(t_mlx_data *mlx, char **argv);
-static int create_fractol(t_mlx_data *mlx, int type, char **argv);
-static int init_fractol(int type, char **argv);
+static int	check_fractol_type(int argc, char **argv);
+static int	check_args_julia(t_mlx_data *mlx, char **argv);
+static int	create_fractol(t_mlx_data *mlx, int type, char **argv);
+static int	init_fractol(int type, char **argv);
+static void handle_fractol(t_mlx_data *mlx);
+
+/*
+	Julia Examples Values
+	c_real = -0.7;
+	c_imag = 0.28015
+	----------------------
+	c_real = 0.285;
+	float c_imag = -0.01;
+	----------------------
+*/
 
 // Comprobamos que argumento nos llega
 // Comprobamos si es julia si tiene todos los argumentos que necesitamos
@@ -58,7 +69,6 @@ static int check_args_julia(t_mlx_data *mlx, char **argv)
 	float c_real;
 	float c_imag;
 
-	printf("Hola");
 	if (is_numeric(argv[2]) == -1)
 		return (-1);
 	if (is_numeric(argv[3]) == -1)
@@ -111,27 +121,18 @@ static int init_fractol(int type, char **argv)
 		free(mlx);
 		return (-1);
 	}
-	printf("\ntype %d...", type);
 	if (mlx->fractal_type == 0)
-	{
-		printf("DRAW_MANDELBROT...");
-		calculate_y(mlx, 1);
-	}
+		handle_fractol(mlx);
 	else if (mlx->fractal_type == 1) // TODO: LO MISMO SE PUEDE ARREGLAR ESTA LINEA....
 	{
-		printf("JULIA");
 		if (check_args_julia(mlx, argv))
-		{
-			printf("\nDRAW JULIA!\n");
-			calculate_y(mlx, 1);
-		}
+			handle_fractol(mlx);
 		else
+		{
+			free(mlx);
 			return (-1);
+		}
 	}
-	printf("Pasamos por aqui");
-	set_hooks(mlx);
-	mlx_loop(mlx->mlx_ptr);
-	cleanup_mlx(mlx);
 	return (0);
 }
 
@@ -148,4 +149,12 @@ static int create_fractol(t_mlx_data *mlx, int type, char **argv)
 		return (-1);
 	}
 	return (0);
+}
+
+static void handle_fractol(t_mlx_data *mlx)
+{
+	calculate_y(mlx, 1);
+	set_hooks(mlx);
+	mlx_loop(mlx->mlx_ptr);
+	cleanup_mlx(mlx);
 }

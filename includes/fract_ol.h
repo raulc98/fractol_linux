@@ -68,11 +68,9 @@ void	move_left(t_mlx_data *mlx, float step);
 void	increase_iterations(t_mlx_data *mlx);
 void	decrease_iterations(t_mlx_data *mlx);
 void	draw_mandelbrot(t_mlx_data *mlx, int first_time);
-int		mandelbrot(t_complex c, int max_iterations);
 int		get_color(t_mlx_data *mlx, int color_scheme, int iteration);
 void	put_pixel_to_image(t_image *image, int x, int y, int color);
 int		mouse_press(int button, int x, int y, t_mlx_data *mlx);
-void	draw_julia(t_mlx_data *mlx, int first_time);
 int		ft_strcmp(char *s1, char *s2);
 int		ft_strlen(const char *s);
 void	ft_putstr_fd(char *s, int fd);
@@ -88,9 +86,8 @@ int		init_complex(t_mlx_data *mlx, char **argv);
 void	leaks(void);
 void	parameters_instructions(void);
 
-void	check_fractol_type_controller(t_mlx_data *mlx);
 int		iterator_mandelbrot(t_complex c, int max_iterations);
-int		iterator_julia(int max_iterations, float c_real, float c_imag);
+int		iterator_julia(t_complex z, int max_iterations, float c_real, float c_imag);
 void	calculate_y(t_mlx_data *mlx, int first_time);
 void	calculate_x(t_mlx_data *mlx, int y,const float c_imag);
 

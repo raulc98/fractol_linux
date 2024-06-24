@@ -14,12 +14,14 @@
 
 void	move_up(t_mlx_data *mlx, float step)
 {
+	printf("step up:  %f\n",step);
 	mlx->min_imag -= step;
 	mlx->max_imag -= step;
 }
 
 void	move_down(t_mlx_data *mlx, float step)
 {
+	printf("step down:  %f\n",step);
 	mlx->min_imag += step;
 	mlx->max_imag += step;
 }

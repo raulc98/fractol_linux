@@ -21,5 +21,6 @@ int	mouse_press(int button, int x, int y, t_mlx_data *mlx)
 		zoom(mlx);
 	else if (button == 5)
 		zoom_out(mlx);
+	calculate_y(mlx,-1);
 	return (0);
 }

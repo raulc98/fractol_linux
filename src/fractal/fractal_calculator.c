@@ -45,12 +45,12 @@ void	calculate_x(t_mlx_data *mlx, int y,const float c_imag)
 		c.real = c_real;
 		c.imag = c_imag;
 		if(mlx->fractal_type)
-			iter = iterator_julia( mlx->max_iterations,mlx->c_real,mlx->c_imag);
+			iter = iterator_julia(c, mlx->max_iterations, mlx->c_real, mlx->c_imag);
 		else
 			iter = iterator_mandelbrot(c, mlx->max_iterations);
 		put_pixel_to_image(&mlx->img, x, y, get_color(mlx, mlx->color, iter));
 		x++;
-	}	
+	}
 }
 
 //Itera nuestro fractal y tal....
@@ -76,24 +76,33 @@ int	iterator_mandelbrot(t_complex c, int max_iterations)
 	return (n);
 }
 
-int iterator_julia(int max_iterations, float c_real, float c_imag)
+int iterator_julia(t_complex z, int max_iterations, float c_real, float c_imag)
 {
-	float	z_real;
-	float	z_imag;
-	float	temp;
-	int		n;
+    float z_real;
+    float z_imag;
+    float temp;
+    int n;
 
-	printf("ITERATOR JULUA");
-	z_real = c_real;
-	z_imag = c_imag;
-	n = 0;
-	temp = 0;
-	while (z_real * z_real + z_imag * z_imag <= 4.0f && n < max_iterations)
-	{
-		temp = z_real;
-		z_real = z_real * z_real - z_imag * z_imag + c_real;
-		z_imag = 2.0f * temp * z_imag + c_imag;
-		n++;
-	}
-	return (n);
+    z_real = z.real;
+    z_imag = z.imag;
+    n = 0;
+    temp = 0;
+    while (z_real * z_real + z_imag * z_imag <= 4.0f && n < max_iterations)
+    {
+        temp = z_real;
+        z_real = z_real * z_real - z_imag * z_imag + c_real;
+        z_imag = 2.0f * temp * z_imag + c_imag;
+        n++;
+    }
+    return (n);
+}
+
+//TODO: SACAR A OTRO SITIO...
+void	put_pixel_to_image(t_image *image, int x, int y, int color)
+{
+	unsigned int	*pixel_ptr;
+
+	pixel_ptr = (unsigned int *)(image->addr
+			+ (y * image->line_length) + (x * (image->bpp / 8)));
+	*pixel_ptr = color;
 }

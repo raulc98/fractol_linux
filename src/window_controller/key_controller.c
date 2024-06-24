@@ -46,8 +46,8 @@ int	key_press(int keycode, t_mlx_data *mlx)
 	else if (keycode == 50)
 		decrease_iterations(mlx);
 	else
-		handle_options_input (keycode, mlx);
-	check_fractol_type_controller(mlx);
+		handle_options_input(keycode, mlx);
+	calculate_y(mlx,-1);
 	return (0);
 }
 

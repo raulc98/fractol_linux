@@ -12,41 +12,43 @@
 
 #include "../../includes/fract_ol.h"
 
-static void	zoom_fractal(t_mlx_data *mlx, float zoom_factor);
+static void	zoom_fractal(t_mlx_data *mlx, float zoom_factor,int is_zoom);
 
 void	zoom(t_mlx_data *mlx)
 {
-	mlx->zoom += 1;
-	mlx->step /= 1.12; //TODO: este zoom aporta algo¿¿?¿?
-	zoom_fractal(mlx, 1.0 / 0.87);
+	if(mlx->zoom <= 110)
+	{
+		mlx->zoom += 1;
+		zoom_fractal(mlx, 1.0 / 0.87,1);
+	}
 }
 
 void	zoom_out(t_mlx_data *mlx)
 {
-	mlx->zoom -= 1;
-	mlx->step *= 1.12;
-	zoom_fractal(mlx, 0.87);
+	if(mlx->zoom >= -10)
+	{
+		mlx->zoom -= 1;
+		zoom_fractal(mlx, 0.87,0);
+	}
 }
 
-static void zoom_fractal(t_mlx_data *mlx, float zoom_factor)
+static void zoom_fractal(t_mlx_data *mlx, float zoom_factor,int is_zoom)
 {
-	double	c_real;
-	double	c_imag;
-	double	new_size;
+	float	c_real;
+	float	c_imag;
+	float	new_size;
 
-	c_real = mlx->min_real + 290 * ((mlx->max_real - mlx->min_real) / 580);
-	printf("c_real: %f\n",c_real);
-	c_imag = mlx->max_imag - 290 * ((mlx->max_imag - mlx->min_imag) / 580);
-	printf("c_imag: %f\n",c_imag);
-	new_size = (mlx->max_imag - mlx->min_imag) / zoom_factor; //Esta operacion que aporta exactamente?¿???¿?
-	printf("new_size: %f\n", new_size);
-	if(new_size > 0.000001 && new_size < 10)
-	{
-		mlx->min_real = c_real - new_size / 2;
-		mlx->max_real = c_real + new_size / 2;
-		mlx->min_imag = c_imag - new_size / 2;
-		mlx->max_imag = c_imag + new_size / 2;
-	}else{
-		printf("Demasiado zoooom :( %f\n", new_size);
-	}
+	c_real = mlx->min_real + 300 * ((mlx->max_real - mlx->min_real) / 600);
+	c_imag = mlx->max_imag - 300 * ((mlx->max_imag - mlx->min_imag) / 600);
+
+	new_size = (mlx->max_imag - mlx->min_imag) / zoom_factor;
+	mlx->min_real = c_real - new_size / 2;
+	mlx->max_real = c_real + new_size / 2;
+	mlx->min_imag = c_imag - new_size / 2;
+	mlx->max_imag = c_imag + new_size / 2;
+	if(is_zoom)
+		mlx->step /= 1.12;
+	else
+		mlx->step *= 1.12;
+
 }
