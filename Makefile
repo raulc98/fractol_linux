@@ -48,8 +48,9 @@ LIBFT       =   ft_putstr_fd.c \
 				ft_isdigit.c
 MAIN        =   instructions.c \
                 leaks_controller.c \
-                main_utils.c \
-				init_complex.c \
+                controller.c \
+				initializers.c \
+				checkers.c \
                 main.c
 WINDOW      =   key_controller.c \
                 mouse_controller.c 
