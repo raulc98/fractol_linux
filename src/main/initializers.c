@@ -21,6 +21,10 @@ int	initialize_complex(t_mlx_data *mlx, char **argv)
 	c_imag = 0;
 	if (mlx->fractal_type == 1)
 	{
+		if(is_validated_number(argv[2]) || is_validated_number(argv[3]))
+		{
+			return (-1);
+		}
 		c_real = ft_atof(argv[2]);
 		c_imag = ft_atof(argv[3]);
 		if (c_real != -1 && c_imag != -1)
@@ -30,22 +34,18 @@ int	initialize_complex(t_mlx_data *mlx, char **argv)
 			return (0);
 		}
 		else
-			return (1);
+			return (-1);
 	}
 	else if (mlx->fractal_type == 0)
 		return (0);
-	return (1);
+	return (-1);
 }
 
 int initialize_fractol(t_mlx_data *mlx, int type, char **argv)
 {
 	initialize_mlx_struct(mlx, type);
 	if (initialize_complex(mlx, argv) == -1)
-	{
-		parameters_instructions();
-		cleanup_mlx(mlx);
 		return (-1);
-	}
 	return (0);
 }
 

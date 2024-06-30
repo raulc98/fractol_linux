@@ -20,10 +20,9 @@
 	c_real = 0.285;
 	float c_imag = -0.01;
 	----------------------
+	./fractol julia 0.3123 -1.545
 */
 // atexit(leaks);
-// Comprobamos que argumento nos llega
-// Comprobamos si es julia si tiene todos los argumentos que necesitamos
 int main(int argc, char **argv)
 {
 	int type;

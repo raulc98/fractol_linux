@@ -14,22 +14,24 @@
 
 static void	zoom_fractal(t_mlx_data *mlx, float zoom_factor,int is_zoom);
 
-void	zoom(t_mlx_data *mlx)
+int	zoom(t_mlx_data *mlx)
 {
 	if(mlx->zoom <= 110)
 	{
 		mlx->zoom += 1;
 		zoom_fractal(mlx, 1.0 / 0.87,1);
 	}
+	return (1);
 }
 
-void	zoom_out(t_mlx_data *mlx)
+int	zoom_out(t_mlx_data *mlx)
 {
 	if(mlx->zoom >= -10)
 	{
 		mlx->zoom -= 1;
 		zoom_fractal(mlx, 0.87,0);
 	}
+	return (1);
 }
 
 static void zoom_fractal(t_mlx_data *mlx, float zoom_factor,int is_zoom)

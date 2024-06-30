@@ -15,37 +15,40 @@
 static int	color_iterations(t_mlx_data *mlx, int iteration);
 
 /*
-	COLOR_SCHEME 1: GREEN
-	COLOR_SCHEME 2: RED
-	COLOR_SCHEME 3: BLUE
-	COLOR_SCHEME 4: VARIOUS COLORS
+	COLOR_SCHEME 1,2,3,4: VARIOUS COLORS
 	COLOR_SCHEME 5: DEFAULT
 */
 int	get_color(t_mlx_data *mlx, int color_scheme, int iteration)
 {
 	unsigned char	color;
-	unsigned char	red;
-	unsigned char	green;
-	unsigned char	blue;
+	unsigned char	color_1;
+	unsigned char	color_2;
+	unsigned char	color_3;
 
 	color = color_iterations(mlx, iteration);
+	color_1 = (iteration * 5) % 256;
+	color_2 = (iteration * 10) % 256;
+	color_3 = (iteration * 15) % 256;
 	if (color_scheme == 1)
-		return (color << 8);
+		return ( color_3 << 16 | color_2 << 8 | color_1);
 	else if (color_scheme == 2)
-		return (color << 16);
+		return ( color_1 << 16 | color_3 << 8 | color_2);
 	else if (color_scheme == 3)
-		return (color);
+		return ( color_2 << 16 | color_1 << 8 | color_3);
 	else if (color_scheme == 4)
-	{
-		red = (iteration * 5) % 256;
-		green = (iteration * 10) % 256;
-		blue = (iteration * 15) % 256;
-		return (red << 16 | green << 8 | blue);
-	}
+		return (color_1 << 16 | color_2 << 8 | color_3);
 	else
 	{
-		return (color << 16 | 33 << 8 | 33);
+		printf("PAsa por aquiiii");
+		return (color);
 	}
+}
+
+int	change_color_scheme(t_mlx_data *mlx, int new_color_scheme)
+{
+	mlx->color = new_color_scheme;
+	mlx_put_image_to_window(mlx->mlx_ptr, mlx->win_ptr, mlx->img.ptr, 0, 0);
+	return (1);
 }
 
 static int	color_iterations(t_mlx_data *mlx, int iteration)

@@ -15,17 +15,44 @@
 float	extract_sign(const char **str);
 float	extract_fraction(const char **str, float sign);
 float	extract_integer(const char **str);
+int		is_overflow(float integer_part, float fraction_part);
 
-float	ft_atof(const char *str)
+#define MAX_ABS_VALUE 10.0
+#define FLOAT_OVERFLOW_ERROR -1.0
+
+float ft_atof(const char *str)
 {
-	float	sign;
-	float	integer_part;
-	float	fraction_part;
+    float sign;
+    float integer_part;
+    float fraction_part;
 
-	sign = extract_sign(&str);
-	integer_part = extract_integer(&str);
-	fraction_part = extract_fraction(&str, sign);
-	return (integer_part + fraction_part);
+    sign = extract_sign(&str);
+    integer_part = extract_integer(&str);
+    fraction_part = extract_fraction(&str, sign);
+
+    // Verificar si el resultado excede la capacidad de un float
+    if (is_overflow(integer_part, fraction_part))
+        return FLOAT_OVERFLOW_ERROR; // Valor de error
+
+    // Verificar si el resultado está fuera del rango [-10, 10]
+    double result = integer_part + fraction_part;
+    if (result > MAX_ABS_VALUE || result < -MAX_ABS_VALUE)
+        return FLOAT_OVERFLOW_ERROR; // Valor de error
+
+    return result;
+}
+
+int is_overflow(float integer_part, float fraction_part)
+{
+	#define CUSTOM_FLT_MAX 3.40282347e+38f
+	#define CUSTOM_FLT_MIN 1.17549435e-38f
+
+    // Verificar si la suma de integer_part y fraction_part produce un valor de overflow
+    if (integer_part > 0 && integer_part > (CUSTOM_FLT_MAX - fraction_part))
+        return 1;
+    if (integer_part < 0 && integer_part < (CUSTOM_FLT_MIN - fraction_part))
+        return 1;
+    return 0;
 }
 
 float	extract_sign(const char **str)
@@ -76,26 +103,3 @@ float	extract_fraction(const char **str, float sign)
 	return (value * sign);
 }
 
-int	is_validated_number(const char *str)
-{
-	int	decimal_point;
-
-	if (*str == '\0' || (str[1] == '\0' && (*str == '+' || *str == '-')))
-		return (0);
-	if (*str == '+' || *str == '-')
-		++str;
-	decimal_point = 0;
-	while (*str)
-	{
-		if (*str == '.')
-		{
-			if (decimal_point)
-				return (0);
-			decimal_point = 1;
-		}
-		else if (!ft_isdigit((unsigned char)*str))
-			return (0);
-		++str;
-	}
-	return (1);
-}

@@ -42,9 +42,7 @@ FRACTAL     =   color.c \
 				fractal_calculator.c 
 LIBFT       =   ft_putstr_fd.c \
                 ft_strcmp.c \
-                ft_strlen.c \
 				atof.c \
-				is_numeric.c \
 				ft_isdigit.c
 MAIN        =   instructions.c \
                 leaks_controller.c \

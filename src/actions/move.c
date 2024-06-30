@@ -12,28 +12,30 @@
 
 #include "../../includes/fract_ol.h"
 
-void	move_up(t_mlx_data *mlx, float step)
+int	move_up(t_mlx_data *mlx, float step)
 {
-	printf("step up:  %f\n",step);
 	mlx->min_imag -= step;
 	mlx->max_imag -= step;
+	return (1);
 }
 
-void	move_down(t_mlx_data *mlx, float step)
+int	move_down(t_mlx_data *mlx, float step)
 {
-	printf("step down:  %f\n",step);
 	mlx->min_imag += step;
 	mlx->max_imag += step;
+	return (1);
 }
 
-void	move_rigth(t_mlx_data *mlx, float step)
+int	move_rigth(t_mlx_data *mlx, float step)
 {
 	mlx->min_real -= step;
 	mlx->max_real -= step;
+	return (1);
 }
 
-void	move_left(t_mlx_data *mlx, float step)
+int	move_left(t_mlx_data *mlx, float step)
 {
 	mlx->min_real += step;
 	mlx->max_real += step;
+	return (1);
 }

@@ -28,37 +28,3 @@ int check_fractol_type(int argc, char **argv)
 	else
 		return (-1);
 }
-
-/*
-	TODO: LO MISMO SE PUEDE CAMBIAR POR UN MENSAJE DE ERROR MAS ADECUADO
-*/
-int check_args_julia(t_mlx_data *mlx, char **argv)
-{
-	float c_real;
-	float c_imag;
-
-	if (is_numeric(argv[2]) == -1)
-		return (-1);
-	if (is_numeric(argv[3]) == -1)
-		return (-1);
-	c_real = ft_atof(argv[2]);
-	if (c_real == -1)
-	{
-		parameters_instructions();
-		cleanup_mlx(mlx);
-		return (-1);
-	}
-	printf("Atof...");
-	c_imag = ft_atof(argv[3]);
-	if (c_imag == -1)
-	{
-		parameters_instructions();
-		cleanup_mlx(mlx);
-		return (-1);
-	}
-	printf("C_REAL %f\n",c_real);
-	mlx->c_real = c_real;
-	printf("C_IMAG %f\n",c_imag);
-	mlx->c_imag = c_imag;
-	return (1);
-}

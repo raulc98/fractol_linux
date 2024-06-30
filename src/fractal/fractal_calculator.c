@@ -98,6 +98,7 @@ int iterator_julia(t_complex z, int max_iterations, float c_real, float c_imag)
 }
 
 //TODO: SACAR A OTRO SITIO...
+//TODO: ESTO QUE HACE EXACTAMENTE¿¿?¿
 void	put_pixel_to_image(t_image *image, int x, int y, int color)
 {
 	unsigned int	*pixel_ptr;

@@ -14,13 +14,16 @@
 
 int	mouse_press(int button, int x, int y, t_mlx_data *mlx)
 {
-	printf("BOTOOOON: %d\n",button);
+	int is_action;
+
 	(void)x;
 	(void)y;
+	is_action = 0;
 	if (button == 4)
-		zoom(mlx);
+		is_action = zoom(mlx);
 	else if (button == 5)
-		zoom_out(mlx);
-	calculate_y(mlx,-1);
+		is_action = zoom_out(mlx);
+	if (is_action)
+		calculate_y(mlx,-1);
 	return (0);
 }

@@ -59,24 +59,23 @@ typedef struct s_complex
 
 int		key_press(int keycode, t_mlx_data *mlx);
 int		handle_options_input(int keycode, t_mlx_data *data);
-void	zoom(t_mlx_data *mlx);
-void	zoom_out(t_mlx_data *mlx);
-void	move_up(t_mlx_data *mlx, float step);
-void	move_down(t_mlx_data *mlx, float step);
-void	move_rigth(t_mlx_data *mlx, float step);
-void	move_left(t_mlx_data *mlx, float step);
-void	increase_iterations(t_mlx_data *mlx);
-void	decrease_iterations(t_mlx_data *mlx);
+int		zoom(t_mlx_data *mlx);
+int		zoom_out(t_mlx_data *mlx);
+int		move_up(t_mlx_data *mlx, float step);
+int		move_down(t_mlx_data *mlx, float step);
+int		move_rigth(t_mlx_data *mlx, float step);
+int		move_left(t_mlx_data *mlx, float step);
+int		increase_iterations(t_mlx_data *mlx);
+int		decrease_iterations(t_mlx_data *mlx);
 void	draw_mandelbrot(t_mlx_data *mlx, int first_time);
 int		get_color(t_mlx_data *mlx, int color_scheme, int iteration);
 int		mouse_press(int button, int x, int y, t_mlx_data *mlx);
 int		ft_strcmp(char *s1, char *s2);
-int		ft_strlen(const char *s);
 void	ft_putstr_fd(char *s, int fd);
-char	**ft_split(char const *s, char c);
 float	ft_atof(const char *str);
 int		ft_isdigit(int c);
-int		is_numeric(const char *str);
+int		is_validated_number(const char *str);
+
 
 //PARAMETERS INSTRUCTION ERROR
 void	parameters_instructions(void);
@@ -89,7 +88,6 @@ void	initialize_mlx_struct(t_mlx_data *mlx, int type);
 int		initialize_mlx(t_mlx_data *mlx);
 //CHECKERS
 int		check_fractol_type(int argc, char **argv);
-int		check_args_julia(t_mlx_data *mlx, char **argv);
 //FRACTOL CONTROLLER
 int		fractol_controller(int type, char **argv);
 void	handle_fractol(t_mlx_data *mlx);
@@ -102,5 +100,7 @@ int		iterator_julia(t_complex z, int max_iterations, float c_real, float c_imag)
 void	calculate_y(t_mlx_data *mlx, int first_time);
 void	calculate_x(t_mlx_data *mlx, int y,const float c_imag);
 void	put_pixel_to_image(t_image *image, int x, int y, int color);
+//COLOR
+int		change_color_scheme(t_mlx_data *mlx, int new_color_scheme);
 
 #endif
