@@ -30,18 +30,15 @@ int	get_color(t_mlx_data *mlx, int color_scheme, int iteration)
 	color_2 = (iteration * 10) % 256;
 	color_3 = (iteration * 15) % 256;
 	if (color_scheme == 1)
-		return ( color_3 << 16 | color_2 << 8 | color_1);
+		return (color_3 << 16 | color_2 << 8 | color_1);
 	else if (color_scheme == 2)
-		return ( color_1 << 16 | color_3 << 8 | color_2);
+		return (color_1 << 16 | color_3 << 8 | color_2);
 	else if (color_scheme == 3)
-		return ( color_2 << 16 | color_1 << 8 | color_3);
+		return (color_2 << 16 | color_1 << 8 | color_3);
 	else if (color_scheme == 4)
 		return (color_1 << 16 | color_2 << 8 | color_3);
 	else
-	{
-		printf("PAsa por aquiiii");
 		return (color);
-	}
 }
 
 int	change_color_scheme(t_mlx_data *mlx, int new_color_scheme)

@@ -42,4 +42,3 @@ int	is_validated_number(const char *str)
 	}
 	return (1);
 }
-

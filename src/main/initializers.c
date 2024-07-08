@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initialize_complex.c                                     :+:      :+:    :+:   */
+/*   initialize_complex.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rcabrero <rcabrero@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -21,7 +21,7 @@ int	initialize_complex(t_mlx_data *mlx, char **argv)
 	c_imag = 0;
 	if (mlx->fractal_type == 1)
 	{
-		if(is_validated_number(argv[2]) || is_validated_number(argv[3]))
+		if (is_validated_number(argv[2]) || is_validated_number(argv[3]))
 		{
 			return (-1);
 		}
@@ -41,7 +41,7 @@ int	initialize_complex(t_mlx_data *mlx, char **argv)
 	return (-1);
 }
 
-int initialize_fractol(t_mlx_data *mlx, int type, char **argv)
+int	initialize_fractol(t_mlx_data *mlx, int type, char **argv)
 {
 	initialize_mlx_struct(mlx, type);
 	if (initialize_complex(mlx, argv) == -1)
@@ -49,11 +49,6 @@ int initialize_fractol(t_mlx_data *mlx, int type, char **argv)
 	return (0);
 }
 
-/*
-	Hay varios ifs que se podrian unificar
-	Quizá se debería cambiar el uso de mls_get_data_addr ya que tiene una recomendacion de uso
-	Hay que aprenderse bien el metodo y saber que hacen los métodos a los que llama
-*/
 int	initialize_mlx(t_mlx_data *mlx)
 {
 	mlx->mlx_ptr = mlx_init();

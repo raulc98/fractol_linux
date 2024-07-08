@@ -12,14 +12,14 @@
 
 #include "../../includes/fract_ol.h"
 
-// TODO: DEBERIAMOS DE COMPROBAR LOS LEAKS...........
-// TODO: ESte metodo hay que rehacerlo entero!
-int fractol_controller(int type, char **argv)
+int	fractol_controller(int type, char **argv)
 {
-	t_mlx_data *mlx;
+	t_mlx_data	*mlx;
+
 	mlx = NULL;
 	mlx = malloc(sizeof(t_mlx_data));
-	if (mlx == NULL || initialize_mlx(mlx) == -1 ||  initialize_fractol(mlx, type, argv) == -1)
+	if (mlx == NULL || initialize_mlx(mlx) == -1
+		|| initialize_fractol(mlx, type, argv) == -1)
 	{
 		parameters_instructions();
 		free(mlx);
@@ -29,7 +29,7 @@ int fractol_controller(int type, char **argv)
 	return (0);
 }
 
-void handle_fractol(t_mlx_data *mlx)
+void	handle_fractol(t_mlx_data *mlx)
 {
 	calculate_y(mlx, 1);
 	set_hooks(mlx);

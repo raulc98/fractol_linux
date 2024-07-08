@@ -21,15 +21,15 @@
 	float c_imag = -0.01;
 	----------------------
 	./fractol julia 0.3123 -1.545
+	atexit(leaks);
 */
-// atexit(leaks);
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	int type;
+	int	type;
 
-	type = check_fractol_type(argc, argv);
+	type = check_fractol_type (argc, argv);
 	if (type == -1)
 		parameters_instructions();
-	fractol_controller(type, argv);
+	fractol_controller (type, argv);
 	return (0);
 }

@@ -14,7 +14,7 @@
 
 int	mouse_press(int button, int x, int y, t_mlx_data *mlx)
 {
-	int is_action;
+	int	is_action;
 
 	(void)x;
 	(void)y;
@@ -24,6 +24,6 @@ int	mouse_press(int button, int x, int y, t_mlx_data *mlx)
 	else if (button == 5)
 		is_action = zoom_out(mlx);
 	if (is_action)
-		calculate_y(mlx,-1);
+		calculate_y(mlx, -1);
 	return (0);
 }

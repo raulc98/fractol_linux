@@ -23,10 +23,9 @@
  * ITERATIONS + : 1
  * IRERATIONS - : 2
 */
-//TODO: DEBERIAMOS DE CAMBIARLOS POR QUE LA GENTE DICE QUE ESTA AK REVES... FALSO!
 int	key_press(int keycode, t_mlx_data *mlx)
 {
-	int is_action;
+	int	is_action;
 
 	is_action = 0;
 	if (keycode == 65363 || keycode == 100)
@@ -41,14 +40,10 @@ int	key_press(int keycode, t_mlx_data *mlx)
 		is_action = zoom(mlx);
 	else if (keycode == 65453 || keycode == 231)
 		is_action = zoom_out(mlx);
-	else if (keycode == 49)
-		is_action = increase_iterations(mlx);
-	else if (keycode == 50)
-		is_action = decrease_iterations(mlx);
 	else
 		is_action = handle_options_input(keycode, mlx);
 	if (is_action == 1)
-		calculate_y(mlx,-1);
+		calculate_y(mlx, -1);
 	return (0);
 }
 
@@ -78,5 +73,9 @@ int	handle_options_input(int keycode, t_mlx_data *data)
 		is_action = change_color_scheme(data, 4);
 	else if (keycode == 54)
 		is_action = change_color_scheme(data, 1);
+	else if (keycode == 49)
+		is_action = increase_iterations(data);
+	else if (keycode == 50)
+		is_action = decrease_iterations(data);
 	return (is_action);
 }

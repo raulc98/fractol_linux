@@ -17,7 +17,7 @@
 	julia return 1
 	and error return -1
 */
-int check_fractol_type(int argc, char **argv)
+int	check_fractol_type(int argc, char **argv)
 {
 	if (argc < 2)
 		return (-1);
