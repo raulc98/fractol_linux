@@ -46,7 +46,6 @@ typedef struct s_mlx_data
 	float	step;
 	int		is_initialized;
 	int		color;
-	int		size;
 	int		max_iterations;
 	int		fractal_type;
 }				t_mlx_data;

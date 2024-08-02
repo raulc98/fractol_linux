@@ -76,15 +76,15 @@ int	iterator_mandelbrot(t_complex c, int max_iterations)
 	return (n);
 }
 
-int	iterator_julia(t_complex z, int max_iterations, float c_real, float c_imag)
+int	iterator_julia(t_complex c, int max_iterations, float c_real, float c_imag)
 {
 	float	z_real;
 	float	z_imag;
 	float	temp;
 	int		n;
 
-	z_real = z.real;
-	z_imag = z.imag;
+	z_real = c.real;
+	z_imag = c.imag;
 	n = 0;
 	temp = 0;
 	while (z_real * z_real + z_imag * z_imag <= 4.0f && n < max_iterations)

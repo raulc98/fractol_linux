@@ -21,7 +21,7 @@ int	increase_iterations(t_mlx_data *mlx)
 
 int	decrease_iterations(t_mlx_data *mlx)
 {
-	if (mlx->max_iterations > 40)
+	if (mlx->max_iterations > 20)
 		mlx->max_iterations -= 10;
 	return (1);
 }
